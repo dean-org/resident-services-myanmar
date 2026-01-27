@@ -111,7 +111,7 @@ public class NotificationService {
 	private static final String SEPARATOR = "/";
 	
 	public NotificationResponseDTO sendNotification(NotificationRequestDto dto) throws ResidentServiceCheckedException {
-		return sendNotification(dto, null, null, null);
+		return sendNotification(dto, List.of("email"),dto.getEmail(), null);
 	}
 
 	public NotificationResponseDTO sendNotification(NotificationRequestDto dto, List<String> channels, String email, String phone) throws ResidentServiceCheckedException {
