@@ -18,7 +18,7 @@ on:
 
 jobs:
   build-maven-resident-services:
-    uses: mosip/kattu/.github/workflows/maven-build.yml@master
+    uses:  ./.github/workflows/maven-build.yml
     with:
       SERVICE_LOCATION: ./resident
       BUILD_ARTIFACT: resident-services
