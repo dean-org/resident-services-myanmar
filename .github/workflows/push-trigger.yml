@@ -14,12 +14,7 @@ on:
         type: string
   push:
     branches:
-      - '!release-branch'
-      - release-1*
-      - master
-      - 1.*
-      - develop
-      - MOSIP*
+      - myanmar
 
 jobs:
   build-maven-resident-services:
