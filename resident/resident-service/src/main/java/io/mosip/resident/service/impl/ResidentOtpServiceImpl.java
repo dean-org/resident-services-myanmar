@@ -64,6 +64,8 @@ public class ResidentOtpServiceImpl implements ResidentOtpService {
 	public OtpResponseDTO generateOtp(OtpRequestDTO otpRequestDTO) throws NoSuchAlgorithmException, ResidentServiceCheckedException {
 		OtpResponseDTO responseDto = null;
 		try {
+			logger.info("Received OTP generation request: {}", objectMapper.writeValueAsString(otpRequestDTO));
+			
 			responseDto = residentServiceRestClient.postApi(
 					env.getProperty(ApiName.OTP_GEN_URL.name()), MediaType.APPLICATION_JSON, otpRequestDTO,
 					OtpResponseDTO.class);
