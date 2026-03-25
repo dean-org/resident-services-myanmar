@@ -166,15 +166,22 @@ public class Utility {
 		pathsegments.add(id);
 		ResponseWrapper<IdRepoResponseDto> response = null;
 		try {
-		String queryParam = "";
-        if (id != null && id.contains("@uid")) {
-            logger.info("ID is handle type, adding idType=handle for ID Repo call. id: {}", id);
-            queryParam = "?idType=handle";
-        } else {
-            logger.info("ID is UIN type. id: {}", id);
-        }
+		if (id != null && id.contains("@uid")) {
+			 logger.info("UID detected, adding idType=handle");
+
+		    List<String> queryParamName = new ArrayList<>();
+		    List<Object> queryParamValue = new ArrayList<>();
+			queryParamName.add("idType");
+   			queryParamValue.add("handle");
+			
 				response = (ResponseWrapper<IdRepoResponseDto>) residentServiceRestClient.getApi(
 						ApiName.IDREPOGETIDBYUIN, pathsegments, queryParam, null, ResponseWrapper.class);
+		}
+			else {
+				logger.info("UIN detected, no idType param");
+				response = (ResponseWrapper<IdRepoResponseDto>) residentServiceRestClient.getApi(
+						ApiName.IDREPOGETIDBYUIN, pathsegments, "", null, ResponseWrapper.class);
+			}
 
 		} catch (ApisResourceAccessException e) {
 			if (e.getCause() instanceof HttpClientErrorException) {
