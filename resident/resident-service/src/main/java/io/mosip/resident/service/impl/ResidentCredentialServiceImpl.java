@@ -212,6 +212,7 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 			     logger.info("Parsed Credential API response: {}", residentCredentialResponseDto);
 				additionalAttributes.put("RID", residentCredentialResponseDto.getRequestId());
 				if(!Utility.isSecureSession()){
+					logger.info("isSecureSession");
 					sendNotification(dto.getIndividualId(), NotificationTemplateCode.RS_CRE_REQ_SUCCESS,
 							additionalAttributes);
 				}
