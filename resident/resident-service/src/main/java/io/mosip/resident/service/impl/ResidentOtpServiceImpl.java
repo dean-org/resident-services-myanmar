@@ -102,7 +102,9 @@ public class ResidentOtpServiceImpl implements ResidentOtpService {
 		residentTransactionEntity.setStatusCode("OTP_REQUESTED");
 		residentTransactionEntity.setStatusComment("OTP_REQUESTED");
 		residentTransactionEntity.setLangCode("eng");
-		residentTransactionEntity.setRefIdType("UIN");
+		// residentTransactionEntity.setRefIdType("UIN");
+		String idType = identityServiceImpl.getIndividualIdType(otpRequestDTO.getIndividualId());
+		residentTransactionEntity.setRefIdType(idType);
 		if( otpRequestDTO.getOtpChannel()!=null && otpRequestDTO.getOtpChannel().size()==1){
 			residentTransactionEntity.setRefId(utility.getIdForResidentTransaction(otpRequestDTO.getIndividualId(), otpRequestDTO.getOtpChannel()));
 		} else{
