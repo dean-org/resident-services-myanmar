@@ -55,6 +55,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import reactor.util.function.Tuple2;
+import io.mosip.resident.config.LoggerConfiguration;
+import io.mosip.kernel.core.logger.spi.Logger;
 
 @RestController
 @Tag(name = "resident-credential-controller", description = "Resident Credential Controller")
@@ -77,6 +79,8 @@ public class ResidentCredentialController {
 	
 	@Value("${resident.share.credential.version}")
 	private String shareCredentialVersion;
+
+	private static final Logger logger = LoggerConfiguration.logConfig(ResidentCredentialController.class);
 
 	@ResponseFilter
 	@PostMapping(value = "/req/credential")
