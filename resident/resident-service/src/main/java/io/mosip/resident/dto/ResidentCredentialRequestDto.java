@@ -14,6 +14,7 @@ public class ResidentCredentialRequestDto {
 	private String transactionID;
 
 	private String individualId;
+	private String individualIdType;
 
 	private String otp;
 
