@@ -89,6 +89,7 @@ public class ResidentCredentialController {
 			@ApiResponse(responseCode = "404", description = "Not Found" ,content = @Content(schema = @Schema(hidden = true)))})
 	public ResponseEntity<Object> reqCredential(@RequestBody RequestWrapper<ResidentCredentialRequestDto> requestDTO)
 			throws ResidentServiceCheckedException {
+		logger.info("Received reqCredential request: {}", requestDTO);
 		audit.setAuditRequestDto(EventEnum.CREDENTIAL_REQ);
 		validator.validateReqCredentialRequest(requestDTO);
 		ResponseWrapper<ResidentCredentialResponseDto> response = new ResponseWrapper<>();
