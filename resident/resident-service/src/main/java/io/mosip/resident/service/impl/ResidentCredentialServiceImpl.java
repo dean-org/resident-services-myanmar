@@ -669,4 +669,5 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 	 *
 	 * }
 	 */
+	
 }
