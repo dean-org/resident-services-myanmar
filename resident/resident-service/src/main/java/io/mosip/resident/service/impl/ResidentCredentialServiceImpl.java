@@ -201,7 +201,6 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 				additionalAttributes.put("encryptionKey", credentialReqestDto.getEncryptionKey());
 				additionalAttributes.put("credentialName", credentialReqestDto.getCredentialType());
 
-			    logger.info("Calling Credential API: {}", credentialUrl);
         		logger.info("Credential API Request Body: {}", requestDto);
 			
 				ResponseWrapper<ResidentCredentialResponseDto> responseDto = residentServiceRestClient.postApi(
