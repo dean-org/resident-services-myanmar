@@ -489,7 +489,7 @@ public class Utility {
 		String phone ="";
 		if (identityDTO != null) {
 			boolean useUid = individualId != null && individualId.toLowerCase().endsWith("@uid");
-    		idValue = useUid ? identityDTO.getUid() : identityDTO.getUIN();
+    		idValue = useUid ? identityDTO.getUID() : identityDTO.getUIN();
 			email = identityDTO.getEmail();
 			phone = identityDTO.getPhone();
 		}
