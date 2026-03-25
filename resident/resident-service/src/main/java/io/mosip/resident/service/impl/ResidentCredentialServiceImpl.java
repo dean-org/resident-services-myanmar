@@ -147,6 +147,7 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 		Map<String, Object> additionalAttributes = new HashMap<>();
 		try {
 			if (idAuthService.validateOtp(dto.getTransactionID(), dto.getIndividualId(), dto.getOtp())) {
+				   logger.info("OTP validation result for transactionId ");
 				return reqCredential(dto, null);
 			} else {
 				logger.debug(LoggerFileConstant.SESSIONID.toString(), LoggerFileConstant.APPLICATIONID.toString(),
@@ -170,6 +171,9 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 	@Override
 	public ResidentCredentialResponseDto reqCredential(ResidentCredentialRequestDto dto, String individualId)
 			throws ResidentServiceCheckedException {
+		logger.info("reqCredential(2) ENTRY - transactionId: {}, individualId: {}, issuer: {}",
+            dto.getTransactionID(), dto.getIndividualId(), dto.getIssuer());
+				
 		ResidentCredentialResponseDto residentCredentialResponseDto = new ResidentCredentialResponseDto();
 		RequestWrapper<CredentialReqestDto> requestDto = new RequestWrapper<>();
 		ResponseWrapper<PartnerResponseDto> parResponseDto = new ResponseWrapper<PartnerResponseDto>();
@@ -184,18 +188,29 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 				requestDto.setRequest(credentialReqestDto);
 				requestDto.setRequesttime(DateUtils.formatToISOString(DateUtils.getUTCCurrentDateTime()));
 				requestDto.setVersion("1.0");
+			
+			    logger.info("Final RequestWrapper payload: {}", requestDto);
+			    logger.info("Calling Partner API: {}", partnerUri);
+			
 				parResponseDto = residentServiceRestClient.getApi(partnerUri, ResponseWrapper.class);
+			    logger.info("Partner API raw response: {}", parResponseDto);
 				partnerResponseDto = JsonUtil.readValue(JsonUtil.writeValueAsString(parResponseDto.getResponse()),
 						PartnerResponseDto.class);
+			    logger.info("Parsed Partner response: {}", partnerResponseDto);
 				additionalAttributes.put("partnerName", partnerResponseDto.getOrganizationName());
 				additionalAttributes.put("encryptionKey", credentialReqestDto.getEncryptionKey());
 				additionalAttributes.put("credentialName", credentialReqestDto.getCredentialType());
 
+			    logger.info("Calling Credential API: {}", credentialUrl);
+        		logger.info("Credential API Request Body: {}", requestDto);
+			
 				ResponseWrapper<ResidentCredentialResponseDto> responseDto = residentServiceRestClient.postApi(
 						env.getProperty(ApiName.CREDENTIAL_REQ_URL.name()), MediaType.APPLICATION_JSON, requestDto,
 						ResponseWrapper.class);
+			    logger.info("Credential API raw response: {}", responseDto);
 				residentCredentialResponseDto = JsonUtil.readValue(
 						JsonUtil.writeValueAsString(responseDto.getResponse()), ResidentCredentialResponseDto.class);
+			     logger.info("Parsed Credential API response: {}", residentCredentialResponseDto);
 				additionalAttributes.put("RID", residentCredentialResponseDto.getRequestId());
 				if(!Utility.isSecureSession()){
 					sendNotification(dto.getIndividualId(), NotificationTemplateCode.RS_CRE_REQ_SUCCESS,
