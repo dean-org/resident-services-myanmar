@@ -224,6 +224,10 @@ public class IdentityServiceImpl implements IdentityService {
 		
 		List<Object> queryParamValue = new ArrayList<>();
 		queryParamValue.add(RETRIEVE_IDENTITY_PARAM_TYPE_DEMO);
+		if (id != null && id.contains("@uid")) {
+		    queryParamName.add("idType");
+		    queryParamValue.add("handle");
+		}
 		
 		try {
 			ResponseWrapper<?> responseWrapper = restClientWithSelfTOkenRestTemplate.getApi(ApiName.IDREPO_IDENTITY_URL,
