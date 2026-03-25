@@ -172,6 +172,7 @@ public class IdentityServiceImpl implements IdentityService {
 		IdentityDTO identityDTO = new IdentityDTO();
 		try {
 			Map<String, Object> identity =	getIdentityAttributes(id, null);
+			 logger.info("Fetched identity for id {}: {}", id, identity);
 			/**
 			 * It is assumed that in the UI schema the UIN is added.
 			 */
