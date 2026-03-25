@@ -169,7 +169,7 @@ public class Utility {
 		String queryParam = "";
         if (id != null && id.contains("@uid")) {
             logger.info("ID is handle type, adding idType=handle for ID Repo call. id: {}", id);
-            queryParam = "idType=handle";
+            queryParam = "?idType=handle";
         } else {
             logger.info("ID is UIN type. id: {}", id);
         }
