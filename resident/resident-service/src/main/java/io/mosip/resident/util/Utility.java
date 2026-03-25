@@ -484,16 +484,15 @@ public class Utility {
 
 	public String getIdForResidentTransaction(String individualId, List<String> channel) throws ResidentServiceCheckedException, NoSuchAlgorithmException {
 		IdentityDTO identityDTO = identityService.getIdentity(individualId);
-		String idValue ="";
+		String uin ="";
 		String email ="";
 		String phone ="";
 		if (identityDTO != null) {
-			boolean useUid = individualId != null && individualId.toLowerCase().endsWith("@uid");
-    		String idValue = useUid ? identityDTO.getUid() : identityDTO.getUIN();
+			uin = identityDTO.getUIN();
 			email = identityDTO.getEmail();
 			phone = identityDTO.getPhone();
 		}
-		String idaToken= identityService.getIDAToken(idValue);
+		String idaToken= identityService.getIDAToken(uin);
 		String id;
 		if(email != null && phone !=null && channel.size()==2) {
 			id= email+phone+idaToken;
