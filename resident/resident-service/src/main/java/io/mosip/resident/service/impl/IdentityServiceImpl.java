@@ -359,6 +359,10 @@ public class IdentityServiceImpl implements IdentityService {
 	
 	@Override
 	public String getUinForIndividualId(String idvid) throws ResidentServiceCheckedException {
+		String idType = getIndividualIdType(idvid); // get the type first
+        // Log input ID and its detected type
+        logger.info("getUinForIndividualId called with id: {} | Detected type: {}", idvid, idType);
+
 	
 		try {
 			if(getIndividualIdType(idvid).equalsIgnoreCase(UIN) || getIndividualIdType(idvid).equalsIgnoreCase(HANDLE)){
