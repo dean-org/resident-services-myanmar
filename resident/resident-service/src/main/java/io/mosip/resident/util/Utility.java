@@ -175,7 +175,7 @@ public class Utility {
    			queryParamValue.add("handle");
 			
 				response = (ResponseWrapper<IdRepoResponseDto>) residentServiceRestClient.getApi(
-						ApiName.IDREPOGETIDBYUIN, pathsegments, queryParam, null, ResponseWrapper.class);
+						ApiName.IDREPOGETIDBYUIN, pathsegments, queryParamName, queryParamValue, null, ResponseWrapper.class);
 		}
 			else {
 				logger.info("UIN detected, no idType param");
