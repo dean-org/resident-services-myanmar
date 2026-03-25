@@ -592,6 +592,8 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
 
 	private NotificationResponseDTO sendNotification(String id, NotificationTemplateCode templateTypeCode,
 			Map<String, Object> additionalAttributes) throws ResidentServiceCheckedException {
+		logger.info("sendNotification called with id: {}, templateTypeCode: {}, additionalAttributes: {}",
+            id, templateTypeCode, additionalAttributes);
 		NotificationRequestDto notificationRequest = new NotificationRequestDto(id, templateTypeCode,
 				additionalAttributes);
 		return notificationService.sendNotification(notificationRequest);
