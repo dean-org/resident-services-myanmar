@@ -169,10 +169,8 @@ public class Utility {
 		if (id != null && id.contains("@uid")) {
 			 logger.info("UID detected, adding idType=handle");
 
-		    List<String> queryParamName = new ArrayList<>();
-		    List<Object> queryParamValue = new ArrayList<>();
-			queryParamName.add("idType");
-   			queryParamValue.add("handle");
+		   String queryParamName = "idType";
+		   String queryParamValue = "handle";
 			
 				response = (ResponseWrapper<IdRepoResponseDto>) residentServiceRestClient.getApi(
 						ApiName.IDREPOGETIDBYUIN, pathsegments, queryParamName, queryParamValue, null, ResponseWrapper.class);
