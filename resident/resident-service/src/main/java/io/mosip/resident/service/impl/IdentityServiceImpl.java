@@ -360,7 +360,7 @@ public class IdentityServiceImpl implements IdentityService {
 	public String getUinForIndividualId(String idvid) throws ResidentServiceCheckedException {
 	
 		try {
-			if(getIndividualIdType(idvid).equalsIgnoreCase(UIN)){
+			if(getIndividualIdType(idvid).equalsIgnoreCase(UIN) || idType.equalsIgnoreCase(HANDLE)){
 				return idvid;
 			}
 			return utilities.getUinByVid(idvid);
