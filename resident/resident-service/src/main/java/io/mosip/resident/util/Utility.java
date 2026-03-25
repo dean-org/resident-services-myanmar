@@ -166,8 +166,15 @@ public class Utility {
 		pathsegments.add(id);
 		ResponseWrapper<IdRepoResponseDto> response = null;
 		try {
+		String queryParam = "";
+        if (id != null && id.contains("@uid")) {
+            logger.info("ID is handle type, adding idType=handle for ID Repo call. id: {}", id);
+            queryParam = "idType=handle";
+        } else {
+            logger.info("ID is UIN type. id: {}", id);
+        }
 				response = (ResponseWrapper<IdRepoResponseDto>) residentServiceRestClient.getApi(
-						ApiName.IDREPOGETIDBYUIN, pathsegments, "", null, ResponseWrapper.class);
+						ApiName.IDREPOGETIDBYUIN, pathsegments, queryParam, null, ResponseWrapper.class);
 
 		} catch (ApisResourceAccessException e) {
 			if (e.getCause() instanceof HttpClientErrorException) {
