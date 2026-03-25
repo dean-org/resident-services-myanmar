@@ -81,6 +81,7 @@ public class IdentityServiceImpl implements IdentityService {
 	private static final String UTF_8 = "utf-8";
 	private static final String RETRIEVE_IDENTITY_PARAM_TYPE_DEMO = "demo";
 	private static final String UIN = "UIN";
+	private static final String HANDLE = "HANDLE";
 	private static final String BEARER_PREFIX = "Bearer ";
 	private static final String AUTHORIZATION = "Authorization";
 	private static final String INDIVIDUAL_ID = "individual_id";
