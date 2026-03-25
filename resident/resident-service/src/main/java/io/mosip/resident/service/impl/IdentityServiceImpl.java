@@ -599,7 +599,7 @@ public class IdentityServiceImpl implements IdentityService {
 
 	public String getIndividualIdType(String individualId){
 		if (individualId != null && individualId.contains("@uid")) {
-        return individualId;
+        return HANDLE;
    		 }
 		if(requestValidator.validateUin(individualId)){
 			return UIN;
