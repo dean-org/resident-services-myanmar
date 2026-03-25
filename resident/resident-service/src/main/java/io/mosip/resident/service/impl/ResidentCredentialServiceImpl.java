@@ -596,6 +596,7 @@ public class ResidentCredentialServiceImpl implements ResidentCredentialService 
             id, templateTypeCode, additionalAttributes);
 		NotificationRequestDto notificationRequest = new NotificationRequestDto(id, templateTypeCode,
 				additionalAttributes);
+		logger.info("notificationRequest : {}",notificationRequest );
 		return notificationService.sendNotification(notificationRequest);
 	}
 
