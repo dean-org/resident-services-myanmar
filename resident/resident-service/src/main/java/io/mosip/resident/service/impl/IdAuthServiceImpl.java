@@ -134,12 +134,18 @@ public class IdAuthServiceImpl implements IdAuthService {
 		String eventId = ResidentConstants.NOT_AVAILABLE;
 		ResidentTransactionEntity residentTransactionEntity = null;
 		try {
+			logger.info("validateOtpV1 START - transactionId: {}, individualId: {}, otp: {}", transactionId, individualId, otp);
 			response = internelOtpAuth(transactionId, individualId, otp);
+			logger.info("internelOtpAuth response: {}", response);
 			residentTransactionEntity = updateResidentTransaction(response.getResponse().isAuthStatus(), transactionId,
 					individualId);
 			if (residentTransactionEntity != null) {
 				eventId = residentTransactionEntity.getEventId();
+				logger.info("updateResidentTransaction returned eventId: {}", eventId);
 			}
+			 else {
+            logger.warn("updateResidentTransaction returned null for transactionId: {}, individualId: {}", transactionId, individualId);
+       		}
 		} catch (ApisResourceAccessException | InvalidKeySpecException | NoSuchAlgorithmException | IOException
 				| JsonProcessingException | java.security.cert.CertificateException e) {
 			logger.error(LoggerFileConstant.SESSIONID.toString(), LoggerFileConstant.USERID.toString(), null,
